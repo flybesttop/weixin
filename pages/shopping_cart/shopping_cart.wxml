@@ -1,0 +1,87 @@
+<!--pages/shopping_cart/shopping_cart.wxml-->
+<view style='background-image:url(http://flybesttop.xin/serverfile/image/banner/banner1-2.jpg);width:100%;height:205rpx;background-size:100% 100%;'>
+  <view class='bar p-sm ' style='height:200rpx;'>
+    <view style='width:530rpx' wx:if='{{defAddress}}'>
+      <view class='flex'>
+        <view style='font-size:40rpx'>{{defAddress.username}}</view>
+        <view style='font-size:20rpx;color:gary;' style='margin-top:15rpx;margin-left:20rpx'>{{defAddress.phone}}</view>
+      </view>
+      <view class='text-truncate-goods' style='height:70rpx'>
+        {{defAddress.shengfen}}{{defAddress.chengshi}}{{defAddress.qu}} {{defAddress.address}}
+      </view>
+    </view>
+    <block wx:if='{{defAddress}}'>
+      <view style='margin-left:20rpx'>
+        <navigator class='round danger btn' url='../address/address'>修改默认</navigator>
+      </view>
+    </block>
+    <block wx:else>
+      <view style='margin-left:235rpx'>
+        <navigator class='round danger btn' url='../address/address'>
+          <text class='iconfont icon-roundadd mr-xs'></text>添加默认地址</navigator>
+      </view>
+    </block>
+  </view>
+</view>
+<block wx:if='{{cartStoreList.length}}'>
+  <checkbox-group>
+    <view class='order-box mv-sm' wx:for='{{cartStoreList}}' wx:key='id'>
+      <view class='order-item'>
+        <view class='order-bar justify-between'>
+          <view class='ml-sm'>
+            <checkbox checked='{{item.ischecked==1}}' data-storecheck='{{item.ischecked}}' data-storeid='{{item.storeId}}' bindtap='checkStore'>{{item.storeName}}</checkbox>
+            <text class='iconfont icon-right'></text> </view>
+          <view class='warning-text mr-sm'>等待付款</view>
+        </view>
+        <view class='goods-main' wx:for='{{item.cartGoods}}' wx:key='id' wx:for-item="cartGoods">
+          <checkbox class='ml-df' checked='{{cartGoods.createTime==1}}' data-cartid='{{cartGoods.id}}' bindtap='checkCart'>
+            <image src='http://localhost:8080/localfile/{{cartGoods.other2}}' mode='aspectFill' class='goods-list-img'></image>
+          </checkbox>
+          <view class='goods-text'>
+            <navigator class='text-truncate-goods flex-wrap' style='height:80rpx;margin-top:0;width:185rpx' hover-class='none' url='../goods/goods?goodsId={{cartGoods.goodsId}}&storeId={{cartGoods.storeId}}'>
+              {{cartGoods.modifiedTime}}
+            </navigator>
+            <view class='mt-xs'>
+              <text class='badge danger round mr-sm'>{{cartGoods.goodsType}}</text>
+            </view>
+          </view>
+          <view class='goods-info' style='width:250rpx;'>
+            <view class='price'>¥ {{cartGoods.goodsMoney}}</view>
+            <view class='del-price'>¥ {{cartGoods.goodsDelmoney}}</view>
+            <view class='flex'>
+              <view class='flex align-center gray ph-xs round m-xs justify-end' style='width:175rpx;'>
+                <button class='btn iconfont icon-add fl xs' data-goodsid='{{cartGoods.goodsId}}' data-typeid='{{cartGoods.other}}' bindtap='insertGoods'></button>
+                <view class='fl pv-xs ph-sm'>{{cartGoods.goodsNum}}</view>
+                <button class='btn iconfont icon-move fl xs' wx:if='{{cartGoods.goodsNum==1}}' data-goodsId='{{cartGoods.goodsId}}' data-typeId='{{cartGoods.other}}'></button>
+                <button class='btn iconfont icon-move fl xs' bindtap='cutDownGoods' wx:if='{{cartGoods.goodsNum>1}}' data-goodsId='{{cartGoods.goodsId}}' data-typeId='{{cartGoods.other}}'></button>
+              </view>
+              <button class='btn iconfont icon-delete fl xs danger mv-sm' data-cartid='{{cartGoods.id}}' bindtap='deleteGoods'></button>
+            </view>
+          </view>
+        </view>
+        <view class='pt-sm pr-sm text-right align-center' style='height:80rpx'>
+          合计:
+          <text class='danger-text ph-sm'>￥</text>{{item.money}}
+        </view>
+      </view>
+    </view>
+    <view style='height:90rpx'></view>
+    <view class="bar bottomfix shadow justify-between">
+      <view class='flex align-center'>
+        <checkbox style='margin-left:20rpx' class='pv-sm mv-sm' checked='{{totalCheck}}' bindtap='checkTotal'>合计：</checkbox>
+        <view class='danger-text pv-sm mv-sm'>￥</view>
+        <view class='pv-sm mv-sm'>{{totalMoney}}</view>
+      </view>
+      <view style='border-radius:30rpx' class='flex justify-end'>
+        <button class='btn warning mr-xs' style='width:120rpx' bindtap='deleteCartCheck'>删除</button>
+        <button class='btn danger mr-xs' style='width:120rpx' bindtap='createOrder'>结算</button>
+      </view>
+    </view>
+  </checkbox-group>
+</block>
+<block wx:else>
+  <view style='width:100%;text-align:center'>
+    <view style='font-size:50rpx;margin-top:100rpx'>购物车为空</view>
+    <view style='font-size:30rpx;'>去买些东西吧O(∩_∩)O</view>
+  </view>
+</block>

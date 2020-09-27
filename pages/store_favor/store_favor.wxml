@@ -1,0 +1,11 @@
+<view class='p-ms' style='width:96%;margin:10rpx auto;border-radius:10rpx;overflow:hidden;'>
+  <view class="bar">
+    <view class='text-lg'>
+      <text class='iconfont icon-likefill danger-text ml-sm'></text> 收藏店铺
+    </view>
+  </view>
+  <navigator class="bar mv-sm" url='../store/store?storeId={{item.id}}' style='height:150rpx' wx:for='{{storelist}}' wx:key='id'>
+    <image src="http://localhost:8080/localfile/{{item.storeHeadImg}}" style='width:150rpx;height:150rpx;margin-left:20rpx'></image>
+    <text class='mh-df text-xxl text-truncate iconfont icon-shopfill'> {{item.storeName}}</text>
+  </navigator>
+</view>

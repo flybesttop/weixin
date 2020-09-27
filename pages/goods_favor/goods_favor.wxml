@@ -1,0 +1,25 @@
+<view class='p-ms' style='width:96%;margin:10rpx auto;border-radius:10rpx;overflow:hidden;'>
+  <view class="bar">
+    <view class='text-lg'>
+      <text class='iconfont icon-favorfill danger-text ml-sm'></text> 收藏商品
+    </view>
+  </view>
+  <view class='card-list-box-index'>
+    <navigator class="ins-list-li-index" url='../goods/goods?goodsId={{item.id}}&storeId={{item.storeId}}' wx:for="{{goodgoodslist}}" wx:key='id'>
+      <view class="ins-list-img">
+        <image src="http://localhost:8080/localfile/{{item.goodHeadImg}}" mode="widthFix"></image>
+        <view class="ins-list-num">
+          <text class="iconfont icon-attentionfill" style='margin-right:10rpx'>{{item.goodsView}}</text>
+          <text class="iconfont icon-favorfill" style='margin-right:10rpx'>{{item.goodsLike}}</text>
+          <text class="iconfont icon-pay">{{item.goodsSales}}</text>
+        </view>
+      </view>
+      <view class="ins-list-author-index flex-wrap">
+        <view class='text-truncate-index' style='height:80rpx;width:100%'>
+          {{item.goodsTitle}}
+        </view>
+        <view class='price' style='font-size:30rpx;color:#f60;'>¥ {{item.goodsMoney}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>

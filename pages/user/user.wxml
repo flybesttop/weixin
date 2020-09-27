@@ -1,0 +1,94 @@
+<!--pages/user/user.wxml-->
+<view class="user">
+  <view class="user-top">
+    <view class="user-img">
+      <image src="../../image/icon_font/account.png" wx:if="{{!hasUserInfo&&canIUse}}" class='radius'></image>
+      <block wx:else>
+        <image class="userinfo-avatar radius" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      </block>
+    </view>
+    <view class="user-text">
+      <button wx:if="{{!hasUserInfo&&canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='btn sm'>授权登录</button>
+      <block wx:else>
+        <view class="user-name">
+          {{userInfo.nickName}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="user-nav icon-nav-box">
+    <view class="icon-nav">
+      <navigator hover-class="none" class="icon-nav-navigator" url='../goods_favor/goods_favor'>
+        <text class="iconfont icon-favorfill"></text>
+        <text class="icon-nav-text">收藏夹</text>
+      </navigator>
+      <navigator hover-class="none" class="icon-nav-navigator" url='../store_favor/store_favor'>
+        <text class="iconfont icon-shopfill"></text>
+        <text class="icon-nav-text">关注店铺</text>
+      </navigator>
+      <navigator hover-class="none" class="icon-nav-navigator" url='../message/message'>
+        <text class="iconfont icon-markfill"></text>
+        <text class="icon-nav-text">消息</text>
+      </navigator>
+      <navigator hover-class="none" class="icon-nav-navigator">
+        <text class="iconfont icon-footprint"></text>
+        <text class="icon-nav-text">足迹</text>
+      </navigator>
+    </view>
+  </view>
+  <view class='user-bg' style='background-image:url(http://flybesttop.xin/serverfile/image/banner/banner1-1.jpg)'>
+  </view>
+</view>
+
+<view class="mb-sm icon-nav-box" style='padding:10rpx 0 0;display:flex;border-radius:20rpx;'>
+  <view class="icon-nav" style='height:250rpx;border-radius:20rpx'>
+    <view class='flex justify-between' style='width:100%'>
+      <view class='ph-sm mh-sm'>
+        我的订单
+      </view>
+      <navigator class='ph-sm mh-sm gray-text text-sm' url='../order/order?orderType=0' hover-class='none'>
+        查看全部订单
+        <text class='iconfont icon-right text-sm'></text>
+      </navigator>
+    </view>
+    <view class='line'></view>
+    <navigator hover-class="none" class="icon-nav-navigator" style='width:185.5rpx' url='../order/order?orderType=1' hover-class='none'>
+      <text class="iconfont icon-send"></text>
+      <text class="icon-nav-text">待发货</text>
+    </navigator>
+    <navigator hover-class="none" class="icon-nav-navigator" style='width:185.5rpx' url='../order/order?orderType=2' hover-class='none'>
+      <text class="iconfont icon-deliver_fill"></text>
+      <text class="icon-nav-text">待收货</text>
+    </navigator>
+    <navigator hover-class="none" class="icon-nav-navigator" style='width:185.5rpx' url='../order/order?orderType=3' hover-class='none'>
+      <text class="iconfont icon-appreciatefill"></text>
+      <text class="icon-nav-text">已完成</text>
+    </navigator>
+    <navigator hover-class="none" class="icon-nav-navigator" style='width:185.5rpx'>
+      <text class="iconfont icon-refund"></text>
+      <text class="icon-nav-text">退款/售后</text>
+    </navigator>
+  </view>
+</view>
+
+<view class='list-box'>
+  <navigator class="list-li list-arrow" url='../address/address' hover-class="none">
+    <view class="list-text">
+      <view class="iconfont icon-location danger-text"> </view> 收货地址
+    </view>
+  </navigator>
+  <navigator class="list-li list-arrow" hover-class="none">
+    <view class="list-text">
+      <view class="iconfont icon-info warning-text"> </view> 关于我们
+    </view>
+  </navigator>
+</view>
+
+<view class='mt-xl' style='margin-left:75%'>
+  <navigator url='../chat/chat' hover-class="none">
+    <button class='btn success round xl'>
+      <text class='iconfont icon-service white-text text-xxl'></text>
+    </button>
+    <view class='pv-xs'>联系客服</view>
+  </navigator>
+</view>

@@ -1,0 +1,4 @@
+<view class="bar bottomfix shadow bar-textarea">
+  <input class='flex-sub solid-bottom ml-sm' focus="true" maxlength="300" cursor-spacing="10"></input>
+  <button class='success btn mh-sm'>发送</button>
+</view>

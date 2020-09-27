@@ -1,0 +1,106 @@
+<!--index.wxml-->
+
+<view class="bar">
+  <view class='serach-form'>
+    <text class="iconfont icon-search"></text>
+    <input type="text" class="search-input sub" placeholder="搜索商品" confirm-type="search" bindtap='gotosearch'/>
+  </view>
+</view>
+<view class='flex' style='background-color: #DED687;'>
+  <text class='iconfont icon-notificationfill text-xxl mh-sm' style='color:white'></text>
+  <view class="marquee_container align-center p-xs" style="--marqueeWidth--:-15em;height:60rpx">
+    <view class="marquee_text">
+      <text class='iconfont icon-activityfill mr-xs'></text>{{marquee.text}}</view>
+  </view>
+</view>
+
+<swiper class='swiper-screen' indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" indicator-active-color="#ff6600">
+  <swiper-item wx:for="12345" wx:key="property">
+    <image src="http://localhost:8080/localfile/image/index-slide/{{index+1}}.png" mode='aspectFill' />
+  </swiper-item>
+</swiper>
+
+<view class='p-ms m-ms' style='width:96%;margin:0 auto;border-radius:10rpx;overflow:hidden'>
+  <view class="bar">
+    <view class='text-lg'>
+      <text class=' iconfont icon-choicenessfill ml-sm' style='color:lightblue'></text> 超级特卖会
+    </view>
+  </view>
+  <view>
+    <view class='list-box lattice-list'>
+      <view class='tablelist'>
+        <view style='width:350rpx;height:40rpx'>
+          <text class='iconfont icon-hot align-start' style='font-size:30rpx;margin-top:0'> 当下最火</text>
+        </view>
+        <view class='flex'>
+          <navigator style='width:33%;' wx:for='{{salesBestGoods}}' wx:key='id' hover-class='none' url='../goods/goods?goodsId={{item.id}}&storeId={{item.storeId}}'>
+            <image src='http://localhost:8080/localfile/{{item.goodHeadImg}}' style='width:98%;height:100rpx;margin:1%;'></image>
+            <view class='price' style='font-size:25rpx;color:#f60;'>¥ {{item.goodsMoney}}</view>
+            <view class='del-price' style='font-size:20rpx;text-decoration:line-through;color:#aaa;'>¥ {{item.goodsDelmoney}}</view>
+          </navigator>
+        </view>
+      </view>
+      <view class='tablelist'>
+        <view style='width:350rpx;height:40rpx'>
+          <text class='iconfont icon-goodsfavor align-start' style='font-size:30rpx;margin-top:0'> 发现好货</text>
+        </view>
+        <view class='flex'>
+          <navigator style='width:50%;' url='../goods/goods?goodsId=6&storeId=4' hover-class='none'>
+            <image src='http://localhost:8080/localfile/image/other/`$NKM1[JZO{YJFLD02JV@62.png' style='width:98%;height:180rpx;margin:1%;'></image>
+          </navigator>
+          <navigator style='width:50%;' url='../goods/goods?goodsId=5&storeId=2' hover-class='none'>
+            <image src='http://localhost:8080/localfile/image/other/BLIV2I}Q6C_E{7]Q7[G(0]Q.png' style='width:98%;height:180rpx;margin:1%;'></image>
+          </navigator>
+        </view>
+      </view>
+      <view class='tablelist'>
+        <view style='width:350rpx;height:40rpx'>
+          <text class='iconfont icon-shop align-start' style='font-size:30rpx;margin-top:0'> 精选店铺</text>
+        </view>
+        <view class='flex'>
+          <navigator style='width:50%;' wx:for='{{hotStore}}' wx:key='id' url='../store/store?storeId={{item.id}}'>
+            <image src='http://localhost:8080/localfile/{{item.storeHeadImg}}' style='width:98%;height:180rpx;margin:1%;border-radius:10rpx'></image>
+          </navigator>
+        </view>
+      </view>
+      <view class='tablelist'>
+        <view style='width:350rpx;height:40rpx'>
+          <text class='iconfont icon-goodsnew align-start' style='font-size:30rpx;margin-top:0'> 天天特卖</text>
+        </view>
+        <view class='flex'>
+          <navigator style='width:50%;' url='../goods/goods?goodsId=3&storeId=3' hover-class='none'>
+            <image src='http://localhost:8080/localfile/image/other/J)F07BI)FXL0OX$WWJZ(UWW.png' style='width:98%;height:180rpx;margin:1%;'></image>
+          </navigator>
+          <navigator style='width:50%;' url='../goods/goods?goodsId=1&storeId=1' hover-class='none'>
+            <image src='http://localhost:8080/localfile/image/other/`LUN$HL)9A}M1}{[BT5KVEW.png' style='width:98%;height:180rpx;margin:1%;'></image>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='p-ms' style='width:96%;margin:10rpx auto;border-radius:10rpx;overflow:hidden;'>
+  <view class="bar">
+    <view class='text-lg'>
+      <text class='iconfont icon-favorfill danger-text ml-sm'></text> 推荐商品
+    </view>
+  </view>
+  <view class='card-list-box-index'>
+    <navigator class="ins-list-li-index" url='../goods/goods?goodsId={{item.id}}&storeId={{item.storeId}}' wx:for="{{goodgoodslist}}" wx:key='id'>
+      <view class="ins-list-img">
+        <image src="http://localhost:8080/localfile/{{item.goodHeadImg}}" mode="widthFix"></image>
+        <view class="ins-list-num">
+          <text class="iconfont icon-attentionfill" style='margin-right:10rpx'>{{item.goodsView}}</text>
+          <text class="iconfont icon-favorfill" style='margin-right:10rpx'>{{item.goodsLike}}</text>
+          <text class="iconfont icon-pay">{{item.goodsSales}}</text>
+        </view>
+      </view>
+      <view class="ins-list-author-index flex-wrap">
+        <view class='text-truncate-index' style='height:80rpx;width:100%'>
+          {{item.goodsTitle}}
+        </view>
+        <view class='price' style='font-size:30rpx;color:#f60;'>¥ {{item.goodsMoney}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>

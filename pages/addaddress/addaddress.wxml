@@ -1,0 +1,38 @@
+<!--pages/addaddress/addaddress.wxml-->
+<view style='background:#fff'>
+  <view class='form-item'>
+    <view class='form-title cur'>
+      姓名
+    </view>
+    <input class='' type="text" placeholder="输入姓名" class='form-input' bindinput='getName' value='{{userName}}'></input>
+  </view>
+  <view class='form-item'>
+    <view class='form-title cur'>
+      手机号码
+    </view>
+    <input class='' type="text" placeholder="输入手机号码" class='form-input' bindinput='getPhone' value='{{phoneNum}}'></input>
+  </view>
+  <view class='form-item'>
+    <view class='form-title cur'>
+      地址选择
+    </view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view>
+  <view class="form-item form-textarea">
+    <view class='form-title cur'>
+      文本框
+    </view>
+    <textarea placeholder='请填写完整地址信息' maxlength="-1" bindinput='getDetil' value='{{detailAddress}}'></textarea>
+  </view>
+  <view class="bar bottomfix shadow justify-center">
+    <button class='btn danger round basis-sm' bindtap='updataAddress'>保存</button>
+  </view>
+</view>
+<view class='bar justify-between mv-sm'>
+  <text class='mh-sm'>设为默认地址</text>
+  <switch class='mh-sm' checked="{{isChecked}}" bindchange="changeSwitch"></switch>
+</view>

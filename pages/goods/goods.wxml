@@ -1,0 +1,98 @@
+<!--pages/goods/goods.wxml-->
+<view class="{{modalName==null?'':'tripList_root'}}">
+  <swiper class='swiper-screen' indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" indicator-active-color="#ff6600">
+    <swiper-item wx:for="{{goodsSlideImgList}}" wx:key="property">
+      <image wx:if='{{item.img}}' src="http://localhost:8080/localfile/{{item.img}}" mode='aspectFill' />
+    </swiper-item>
+  </swiper>
+  <view class="bar" style='height:250rpx'>
+    <view style="width:100%" class='p-sm'>
+      <view class='price' style='font-size:40rpx;color:#f60;'>¥ {{goods.goodsMoney}}</view>
+      <view class='del-price' style='font-size:25rpx;text-decoration:line-through;color:#aaa;'>原价：¥ {{goods.goodsDelmoney}}</view>
+      <view class='text-lg text-truncate-goods'>
+        <text class='iconfont icon-goods danger-text mr-xs'></text> {{goods.goodsTitle}}
+      </view>
+      <view class='justify-between flex' style='width:100%'>
+        <text class='' style='margin-top:30rpx;font-size:20rpx;color:#aaa;'>快递：{{goods.goodsExpress}}</text>
+        <text class='' style='margin-top:30rpx;font-size:20rpx;color:#aaa;'>月销: {{goods.goodsSales}}</text>
+        <text class='' style='margin-top:30rpx;font-size:20rpx;color:#aaa;'>{{goods.goodsArea}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='mt-sm p-sm' style='background:white;width:100%;text-align:center'>
+    <text>-商品详情-</text>
+    <view style='width:100%'>
+      <image wx:if='{{item.img}}' src='http://localhost:8080/localfile/{{item.img}}' mode='widthFix' style='width:100%' wx:for='{{goodsDetilImgList}}' wx:key='id'></image>
+    </view>
+  </view>
+  <view style='height:100rpx'></view>
+  <view class="bar bottomfix shadow btns">
+    <view class='flex-sub solid-right' bindtap='gotochat' hover-class="none">
+      <view class="text-xs gray-text">
+        <view class='iconfont icon-service success-text text-lg'></view>
+        <text class='badge mark-badge cur'></text> 客服
+      </view>
+    </view>
+    <view class='flex-sub solid-right text-sm' bindtap='gotostore' hover-class="none">
+      <view class="text-xs gray-text">
+        <view class='iconfont icon-shop warning-text text-lg'></view>
+        店铺
+      </view>
+    </view>
+    <view class='flex-sub solid-right text-sm'>
+      <view class="text-xs gray-text" wx:if='{{isfavor}}' bindtap='favor'>
+        <view class='iconfont icon-favorfill warning-text text-lg'></view>
+        已收藏
+      </view>
+      <view class="text-xs gray-text" wx:if='{{!isfavor}}' bindtap='favor'>
+        <view class='iconfont icon-favor warning-text text-lg'></view>
+        收藏
+      </view>
+    </view>
+    <view class='flex-sub text-sm'>
+      <view class="text-xs gray-text" bindtap='gotocart' hover-class="none">
+        <view class='iconfont icon-cart warning-text text-lg'></view>
+        购物车
+      </view>
+    </view>
+    <view class="warning flex-twice {{modalName=='bottomModal'?'cur':''}}" bindtap='showModal' data-modal="bottomModal">加入购物车</view>
+  </view>
+</view>
+<view class="modal-box bottom-modal {{modalName=='bottomModal'?'cur':''}}">
+  <view class='modal-dialog' style='border-top-left-radius:15rpx;border-top-right-radius:20rpx;'>
+    <view class="modal-title flex">
+      <view style='background:red;width:170rpx;height:200rpx;margin-left:30rpx;border:1rpx silde white;'>
+        <image wx:if='{{goods.goodHeadImg}}' src='http://localhost:8080/localfile/{{goods.goodHeadImg}}' style='width:170rpx;height:200rpx'></image>
+      </view>
+      <view>
+        <view class='price pl-sm' style='font-size:40rpx;color:#f60;text-align:left'>¥ {{nowType.goodsMoney}}</view>
+        <view class='p-xs text-truncate-goods flex-wrap' style='height:150rpx;margin-top:0'>
+          <text class='iconfont icon-goodsfavor' style='font-size:45rpx;margin-right:15rpx'></text>{{goods.goodsTitle}}
+        </view>
+      </view>
+      <view class='bar-close badge danger round' bindtap='closeModal'>
+        <text class='iconfont icon-close'></text>
+      </view>
+    </view>
+    <scroll-view class='modal-bd p-sm' scroll-y="true" style='height:450rpx'>
+      <view style='font-size:30rpx;margin-left:30rpx;' class='iconfont icon-similar'> 选择</view>
+      <view class='flex flex-wrap'>
+        <view class="p-xs m-sm {{nowType.id==item.id ? 'goods-type-checked':'goods-type-def' }}" bindtap='clicktype' data-total='{{item}}' wx:for='{{goodsTypeList}}' wx:key='id'>
+          {{item.goodsType}}
+        </view>
+      </view>
+    </scroll-view>
+    <view style='height:100rpx'></view>
+    <view class="bar bottomfix shadow btns" style='background:#f8f8f8;'>
+      <view class="flex-twice" style='border-radius:40rpx'>购买数量：
+        <view class='flex align-center gray ph-xs round m-xs justify-end' style='width:180rpx'>
+          <button class='btn iconfont icon-add fl xs' bindtap='addSelectNum'></button>
+          <view class='fl pv-xs ph-sm'>{{selectNum}}</view>
+          <button class='btn iconfont icon-move fl xs' wx:if='{{selectNum!=1}}' bindtap='removeSelectNum'></button>
+          <button class='btn iconfont icon-move fl xs' wx:if='{{selectNum==1}}'></button>
+        </view>
+      </view>
+      <view class="danger flex-twice align-center" style='border-radius:40rpx;line-height:90rpx' bindtap='insertCart'>确认</view>
+    </view>
+  </view>
+</view>

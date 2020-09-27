@@ -1,0 +1,55 @@
+<!--pages/store/store.wxml-->
+
+<image wx:if='{{item.img}}' src="http://localhost:8080/localfile/{{item.img}}" class='top-image' wx:for='{{storeImgList}}' wx:key='id'></image>
+<view style='height:150rpx;background:white;width:100%;border-top:1px solid transparent;' class='flex justify-between'>
+  <view class='flex'>
+    <view class='store-head-img'>
+      <image wx:if='{{store.storeHeadImg}}' src='http://localhost:8080/localfile/{{store.storeHeadImg}}' style='width:150rpx;height:150rpx'></image>
+    </view>
+    <view>
+      <view class='m-sm text-lg'>{{store.storeName}}</view>
+      <view class='m-sm text-xs' style='color:#b0b0b0'>共 {{goodsList.length}} 件商品</view>
+    </view>
+  </view>
+  <view class="iconfont icon-like like-store like-store-red" bindtap='favor' wx:if='{{isfavor}}'>
+    <text style='font-size: 24rpx;'>
+  已关注
+  </text>
+  </view>
+   <view class="iconfont icon-like like-store" bindtap='favor' wx:if='{{!isfavor}}'>
+    <text style='font-size: 24rpx;'>
+  关注该店
+  </text>
+  </view>
+</view>
+
+<view class='mv-sm' style='width:100%;background:white'>
+  <view class='iconfont icon-notification p-sm'> 店铺公告</view>
+  <view class='p-sm' style='width:100%;word-wrap:break-word;'>{{store.storeContext}}</view>
+</view>
+<view class='p-ms' style='width:96%;margin:10rpx auto;border-radius:10rpx;overflow:hidden;'>
+  <view class="bar">
+    <view class='text-lg'>
+      - 所有商品 -
+    </view>
+  </view>
+  <view class='card-list-box-index'>
+    <navigator class="ins-list-li-index" url='../goods/goods?goodsId={{item.id}}&storeId={{store.id}}' wx:for='{{goodsList}}' wx:key='id'>
+      <view class="ins-list-img">
+        <image wx:if='{{item.goodHeadImg}}' src="http://localhost:8080/localfile/{{item.goodHeadImg}}" mode="widthFix"></image>
+        <view class="ins-list-num">
+          <text class="iconfont icon-attentionfill" style='margin-right:10rpx'>{{item.goodsView}}</text>
+          <text class="iconfont icon-favorfill" style='margin-right:10rpx'>{{item.goodsLike}}</text>
+          <text class="iconfont icon-pay">{{item.goodsSales}}</text>
+        </view>
+        <!-- <view class="ins-list-title">小兔几</view> -->
+      </view>
+      <view class="ins-list-author-index flex-wrap">
+        <view class='text-truncate-index' style='height:80rpx;width:100%'>
+          {{item.goodsTitle}}
+        </view>
+        <view class='price' style='font-size:30rpx;color:#f60;'>¥ {{item.goodsMoney}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>

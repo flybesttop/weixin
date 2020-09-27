@@ -1,0 +1,41 @@
+<view class="bar">
+  <view class='serach-form'>
+    <text class="iconfont icon-search"></text>
+    <input type="text" class="search-input sub" value='{{searchwords}}' placeholder="搜索商品" confirm-type="search" bindinput='putsearchwords' bindconfirm='searchNowWords'/>
+  </view>
+  <button class='success btn sm mr-sm' bindtap='searchNowWords'>搜索
+  </button>
+</view>
+<view style='height:300rpx'>
+  <view class='bar p-sm'>
+    <text class='iconfont icon-hotfill danger-text mr-df' style='font-size:30rpx'></text> 热门查询
+  </view>
+  <view>
+    <view class='badge gray round ml-sm mt-xs' wx:for='{{searchTip}}' data-message='{{item.typeName}}' bindtap='changeHotWords' wx:key='primary'>{{item.typeName}}</view>
+  </view>
+</view>
+<view class='p-ms' style='width:96%;margin:10rpx auto;border-radius:10rpx;overflow:hidden;' wx:if='{{isSelected}}'>
+  <view class="bar">
+    <view class='text-lg'>
+      <text class='iconfont icon-similar success-text mr-df'></text>查询结果
+    </view>
+  </view>
+  <view class='card-list-box-index'>
+    <navigator class="ins-list-li-index" url='../goods/goods?goodsId={{item.id}}&storeId={{item.storeId}}' wx:for="{{goodslist}}" wx:key='id'>
+      <view class="ins-list-img">
+        <image src="http://localhost:8080/localfile/{{item.goodHeadImg}}" mode="widthFix"></image>
+        <view class="ins-list-num">
+          <text class="iconfont icon-attentionfill" style='margin-right:10rpx'>{{item.goodsView}}</text>
+          <text class="iconfont icon-favorfill" style='margin-right:10rpx'>{{item.goodsLike}}</text>
+          <text class="iconfont icon-pay">{{item.goodsSales}}</text>
+        </view>
+      </view>
+      <view class="ins-list-author-index flex-wrap">
+        <view class='text-truncate-index' style='height:80rpx;width:100%'>
+          {{item.goodsTitle}}
+        </view>
+        <view class='price' style='font-size:30rpx;color:#f60;'>¥ {{item.goodsMoney}}</view>
+      </view>
+    </navigator>
+  </view>
+</view>

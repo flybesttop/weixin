@@ -1,0 +1,19 @@
+<!--pages/address/address.wxml-->
+<view class='bar p-df ' style='height:200rpx;' wx:for='{{addresslist}}' wx:key='id'>
+  <view style='width:485rpx'>
+    <view class='flex'>
+      <view style='font-size:40rpx'>{{item.username}}</view>
+      <view style='font-size:20rpx;color:gary;' style='margin-top:15rpx;margin-left:20rpx'>{{item.phone}}</view>
+    </view>
+    <view class='text-truncate-address' style='height:70rpx'>
+      <text class='ph-sm' style='color:red;' wx:if="{{item.isDef=='1'}}"> 默认 </text> {{item.shengfen}}{{item.chengshi}}{{item.qu}} {{item.address}}
+    </view>
+  </view>
+  <view style='margin-left:20rpx' class='flex'>
+    <button class='iconfont icon-delete round warning btn mr-xs' data-id='{{item.id}}' data-index='{{index}}' bindtap='deleteAddress'></button>
+    <button class='round danger btn' data-id='{{item.id}}' bindtap='modifiedAddress'>编辑</button>
+  </view>
+</view>
+<view class="bar bottomfix shadow justify-center">
+  <view class='btn danger round basis-sm' bindtap='insertNewAddress'>添加新地址</view>
+</view>

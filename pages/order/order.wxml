@@ -1,0 +1,69 @@
+<view class="nav center-nav">
+  <view class="nav-item-box">
+    <view class="nav-item {{nowType==0?'cur':''}}" bindtap='changeType' data-type='0'>
+      全部</view>
+    <view class="nav-item {{nowType==1?'cur':''}}" bindtap='changeType' data-type='1'>
+      <text class='iconfont icon-send'></text> 待发货</view>
+    <view class="nav-item {{nowType==2?'cur':''}}" bindtap='changeType' data-type='2'>
+      <text class='iconfont icon-deliver_fill'></text> 待收货</view>
+    <view class="nav-item {{nowType==3?'cur':''}}" bindtap='changeType' data-type='3'>
+      <text class='iconfont icon-appreciate'></text> 已完成</view>
+  </view>
+</view>
+<block wx:if='{{orderMessage.length}}'>
+  <view class='mv-xs' style='background:white' wx:for='{{orderMessage}}' wx:key='id'>
+    <view class='order-box mv-sm'>
+      <view class='order-item'>
+        <view class='order-bar justify-between'>
+          <view class='ml-sm'>
+            <navigator url='../store/store?storeId={{item.order.storeId}}' hover-class='none'>{{item.order.storeName}}
+              <text class='iconfont icon-right'></text> </navigator>
+          </view>
+          <view class='warning-text mr-sm' wx:if='{{item.order.status==1}}'>等待发货</view>
+          <view class='danger-text mr-sm' wx:if='{{item.order.status==2}}'>等待收货</view>
+          <view class='success-text mr-sm' wx:if='{{item.order.status==3}}'>完成订单</view>
+        </view>
+        <view class='goods-main'>
+          <image src='http://localhost:8080/localfile/{{item.order.goodsImg}}' mode='aspectFill' class='goods-list-img'></image>
+          <view class='goods-text'>
+            <navigator class='text-truncate-goods flex-wrap' style='height:80rpx;margin-top:0;width:350rpx' hover-class='none' url='../goods/goods?goodsId={{item.order.goodsId}}&storeId={{item.order.storeId}}'>
+              {{item.order.goodsName}}
+            </navigator>
+            <view class='mt-xs'>
+              <text class='badge danger round mr-sm'>{{item.order.other1}}</text>
+            </view>
+          </view>
+          <view class='goods-info' style='width:150rpx;padding-top:30rpx'>
+            <view class='price'>¥ {{item.order.goodsMoney}}</view>
+            <button class='btn fl sm success mv-sm' wx:if='{{item.order.status==2}}' data-orderid='{{item.id}}' bindtap='sureGet'>确认收货</button>
+          </view>
+        </view>
+        <view class='bar p-df' style='height:100rpx;background:#f1f1f1'>
+          <view style='width:100%'>
+            <view class='flex'>
+              <text class='iconfont icon-locationfill pr-sm' style='color:red;font-size:30rpx'></text>
+              <view style='font-size:30rpx'>{{item.address.username}}</view>
+              <view style='font-size:20rpx;color:gary;' style='margin-top:5rpx;margin-left:10rpx'>{{item.address.phone}}</view>
+            </view>
+            <view class='text-truncate'>
+              {{item.address.shengfen}}{{item.address.chengshi}}{{item.address.qu}} {{item.address.address}}
+            </view>
+          </view>
+        </view>
+        <view class='pt-sm ph-sm justify-between align-center flex' style='height:80rpx'>
+          <view>创建时间：{{item.createTime}}</view>
+          <view>
+            <text>共{{item.order.goodsNum}}件</text> 合计:
+            <text class='danger-text'>￥</text>{{item.totalMoney}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view style='width:100%;text-align:center'>
+    <view style='font-size:50rpx;margin-top:100rpx'>订单信息为空</view>
+    <view style='font-size:30rpx;'>去买些东西吧O(∩_∩)O</view>
+  </view>
+</block>

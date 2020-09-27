@@ -1,0 +1,35 @@
+/* pages/user/user.wxss */
+page {
+  background: #f1f1f1;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.line{
+margin: 10rpx auto;
+width: 90%;
+height: 2rpx;
+background-color: #D8D8D8;
+}
+
+.page_bd{
+    padding: 10px;
+}
+.body_head{
+    border: 1px solid;
+    padding: 10px;
+}
+.display_show{
+    display: block;
+    border: 1px solid;    
+    padding: 10px;
+}
+.display_none{
+    display: none;
+}
